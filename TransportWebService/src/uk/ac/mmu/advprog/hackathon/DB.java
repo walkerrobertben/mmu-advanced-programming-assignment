@@ -52,4 +52,25 @@ public class DB implements AutoCloseable {
 		}
 	}
 	
+	
+	
+	//Get stops matching given locality string & type
+	public NaptanStops getStopsInLocality(String locality, String type) throws DBException {
+		try {
+			
+			//Create parameterised statement
+			String query = "SELECT * FROM Stops WHERE LocalityName = ? AND StopType = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, locality);
+			statement.setString(2, type);
+			
+			//Execute query and return count from first row
+			ResultSet results = statement.executeQuery();
+			return new NaptanStops(results);
+
+		} catch(SQLException sqle) {
+			throw new DBException(sqle);
+		}
+	}
+	
 }

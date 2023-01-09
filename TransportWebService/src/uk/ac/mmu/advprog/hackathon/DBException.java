@@ -4,6 +4,8 @@ import java.sql.SQLException;
 
 public class DBException extends Exception {
 	
+	private static final long serialVersionUID = 1L;
+	
 	public SQLException underlying_sqle = null;
 	
 	public DBException() {}
