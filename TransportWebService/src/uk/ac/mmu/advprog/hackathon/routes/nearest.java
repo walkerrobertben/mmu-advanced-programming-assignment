@@ -8,9 +8,13 @@ import uk.ac.mmu.advprog.hackathon.DBException;
 import uk.ac.mmu.advprog.hackathon.Validation;
 import uk.ac.mmu.advprog.hackathon.naptan.NaptanStops;
 
+/*
+ * Spark route for get request to /nearest
+ */
 public class nearest implements Route {
 	@Override
 	public Object handle(Request req, Response res) {
+		
 		
 		//parse req for lat, lon, type
 		//validate parameters
@@ -18,8 +22,10 @@ public class nearest implements Route {
 		//parse result into 'NaptanStops' object
 		//return NaptanStops.xml()
 		
-		//> if query fails, return server error (500)
-		//> if invalid, return invalid request (400)
+		//if query fails, return server error (500)
+		//if invalid, return invalid request (400)
+		
+		
 		
 		//Extract url params
 		String lat_str = req.queryParams("latitude");

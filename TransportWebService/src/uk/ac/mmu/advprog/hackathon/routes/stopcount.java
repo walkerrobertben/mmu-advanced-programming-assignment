@@ -8,17 +8,23 @@ import uk.ac.mmu.advprog.hackathon.DB;
 import uk.ac.mmu.advprog.hackathon.DBException;
 import uk.ac.mmu.advprog.hackathon.Validation;
 
+/*
+ * Spark route for get request to /stopcount
+ */
 public class stopcount implements Route {
 	@Override
 	public Object handle(Request req, Response res) {
+		
 		
 		//parse req for locality
 		//validate parameters
 		//run db query
 		//return result
 		
-		//> if query fails, return server error (500)
-		//> if invalid, return invalid request (400)
+		//if query fails, return server error (500)
+		//if invalid, return invalid request (400)
+		
+		
 		
 		//Extract url params
 		String locality = req.queryParams("locality");

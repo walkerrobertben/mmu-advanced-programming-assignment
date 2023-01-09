@@ -9,12 +9,19 @@ import uk.ac.mmu.advprog.hackathon.naptan.NaptanStops;
 
 import java.sql.PreparedStatement;
 
+/*
+ * DB class handles connecting, reading, and closing the sqlite database
+ * Implements AutoClosable interface - intended for use in a try-resource statement
+ */
 public class DB implements AutoCloseable {
 	
 	private static final String JDBC_CONNECTION_STRING = "jdbc:sqlite:./data/NaPTAN.db";
 	private Connection connection = null;
 	
-	//Constructor connects to sqlite db
+	/*
+	 * DB class constructor
+	 * Connects to database, throws DBException if connection fails.
+	 */
 	public DB() throws DBException {
 		try {
 			this.connection = DriverManager.getConnection(JDBC_CONNECTION_STRING);
@@ -24,7 +31,10 @@ public class DB implements AutoCloseable {
 		}
 	}
 	
-	//Close connection on cleanup
+	/*
+	 * close method for AutoCloseable interface
+	 * If database connection present, close it. Throws DBException if this fails
+	 */
 	@Override
 	public void close() throws DBException {
 		try {
@@ -40,7 +50,15 @@ public class DB implements AutoCloseable {
 		}
 	}
 	
-	//Count stops matching given locality string
+	/*
+	 * Counts the number of stops which match the provided locality string.
+	 * Throws DBException if query execution fails
+	 * 
+	 * @param	locality	only count stops in this locality
+	 * 
+	 * @return number of stops in locality (int)
+	 * 
+	 */
 	public int countStopsByLocality(String locality) throws DBException {
 		try {
 			
@@ -59,7 +77,17 @@ public class DB implements AutoCloseable {
 		}
 	}
 	
-	//Get stops matching given locality string & type
+	/*
+	 * Get all stops of type in locality.
+	 * Throws DBException if query execution fails
+	 * Returns a NaptanStops object
+	 * 
+	 * @param	locality	only include stops in this locality
+	 * @param	type		only include stops of this type
+	 * 
+	 * @return NaptanStops object containing all matching stops
+	 * 
+	 */
 	public NaptanStops getStopsInLocality(String locality, String type) throws DBException {
 		try {
 			
@@ -78,7 +106,22 @@ public class DB implements AutoCloseable {
 		}
 	}
 	
-	//Get n stops matching type, ordered by proximity to lat/lon
+	/*
+	 * Get n stops of type, ordered by proximity to specified location.
+	 * Throws DBException if query execution fails
+	 * Returns a NaptanStops object
+	 * 
+	 * Proximity is approximated with pythag. Will probably get a bit funky near poles, over longer distances.
+	 * Since Naptan is UK only, this wont be a problem.
+	 * 
+	 * @param	lat		latitude coordinate
+	 * @param	lon		longitude coordinate
+	 * @param	type	only include stops of this type
+	 * @param	limit	return *at most* this many stops
+	 * 
+	 * @return NaptanStops object containing all matching stops, ordered by proximity to lat/lon
+	 * 
+	 */
 	public NaptanStops getNearestStops(float lat, float lon, String type, int limit) throws DBException {
 		try {
 			

@@ -17,10 +17,26 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+
+/*
+ * NaptanStops class
+ * 
+ * Used to parse and represent a ResultSet from database
+ */
 public class NaptanStops {
 	
 	private ArrayList<NaptanStop> naptanStops;
-
+	
+	/*
+	 * NaptanStops constructor
+	 * Parses ResultSet object rows into NaptanStop objects
+	 * 
+	 * ResultSet *must* have columns: 	NaptanCode, CommonName, Landmark, Street, 
+	 * 									Indicator, Bearing, LocalityName, Longitude,
+	 * 									Latitude, StopType, BusStopType, TimingStatus
+	 * 
+	 * @param	db_results		ResultSet object where each row represents an individual stop.
+	 */
 	public NaptanStops(ResultSet db_results) throws SQLException {
 		
 		//create stops arraylist
@@ -63,6 +79,9 @@ public class NaptanStops {
 		}
 	}
 	
+	/*
+	 * Returns a json-string representing this NaptanStops object
+	 */
 	public String asJson() {
 		//Create root node, and add stops to root
 		JSONArray root = new JSONArray();
@@ -72,6 +91,12 @@ public class NaptanStops {
 		return root.toString(); //return as string
 	}
 	
+	/*
+	 * Returns an xml-string representing this NaptanStops object
+	 * 
+	 * if xml parsing, fails, an empty xml-string is returned
+	 * this is *not* an empty string, it contains an xml-header tag, but no data.
+	 */
 	public String asXML() {
 		try {
 			

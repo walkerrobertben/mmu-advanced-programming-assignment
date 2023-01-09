@@ -2,8 +2,14 @@ package uk.ac.mmu.advprog.hackathon;
 
 import spark.Spark;
 
+/*
+ * Main class 
+ */
 public class TransportWebService {
-
+	
+	/*
+	 * Entrypoint
+	 */
 	public static void main(String[] args) {		
 		
 		//Run server on port 8088 and connect routes.

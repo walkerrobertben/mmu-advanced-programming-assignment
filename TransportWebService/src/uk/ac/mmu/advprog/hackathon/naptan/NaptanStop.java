@@ -3,6 +3,11 @@ package uk.ac.mmu.advprog.hackathon.naptan;
 import org.json.*;
 import org.w3c.dom.*;
 
+/*
+ * NaptanStop class
+ * 
+ * Used to parse and represent a single database row
+ */
 public class NaptanStop {
 
 	//Represents a single NaptanStop
@@ -19,7 +24,23 @@ public class NaptanStop {
 	public String busStopType;
 	public String timingStatus;
 	
-	//Constructor takes in a single database row
+	/*
+	 * NaptanStops constructor
+	 * 
+	 * @param	naptanCode		naptanCode from database
+	 * @param	commonName		commonName from database
+	 * @param	landmark		landmark from database
+	 * @param	street			street from database
+	 * @param	indicator		indicator from database
+	 * @param	bearing			bearing from database
+	 * @param	localityName	localityName from database
+	 * @param	longitude		longitude from database
+	 * @param	latitude		latitude from database
+	 * @param	stopType		stopType from database
+	 * @param	busStopType		busStopType from database
+	 * @param	timingStatus	timingStatus from database
+	 * 
+	 */
 	public NaptanStop(String naptanCode, String commonName, String landmark, String street, String indicator, String bearing, String localityName, float longitude, float latitude, String stopType, String busStopType, String timingStatus) {
 		this.naptanCode   = naptanCode;
 		this.commonName   = commonName;
@@ -34,9 +55,14 @@ public class NaptanStop {
 		this.busStopType  = busStopType;
 		this.timingStatus = timingStatus;
 	}
-	
-	//empty-string-if-null
-	//utility function for handling null values
+
+	/*
+	 * esin = "empty string if null"
+	 * utility function for handling null values when converting to json/xml representation
+	 * 
+	 * @return	the original object, or an empty string if the original object was null
+	 * 
+	 */
 	private Object esin(Object v) {
 		if (v == null) {
 			return "";
@@ -45,7 +71,12 @@ public class NaptanStop {
 		}
 	}
 	
-	//Return this stop as a JSON node
+	/*
+	 * Get this stop as a JSON node
+	 * 
+	 * @return	a JSON object representing this stop
+	 * 
+	 */
 	public JSONObject asJson() {
 		JSONObject obj = new JSONObject();
 		
@@ -71,7 +102,14 @@ public class NaptanStop {
 	}
 	
 	
-	//Return this stop as an XML element
+	/*
+	 * Get this stop as an XML element
+	 * 
+	 * @param	doc		Document the element will be appended to is building for.
+	 * 
+	 * @return	an XML element representing this stop
+	 * 
+	 */
 	public Element asXML(Document doc) {
 		
 		Element stop = doc.createElement("Stop");
@@ -99,12 +137,14 @@ public class NaptanStop {
 			Element longitude = doc.createElement("Longitude");
 			longitude.setTextContent(String.valueOf(esin(this.longitude)));
 			
+			//append to location
 			location.appendChild(street);
 			location.appendChild(landmark);
 			location.appendChild(latitude);
 			location.appendChild(longitude);
 		}
 		
+		//apend to root
 		stop.appendChild(name);
 		stop.appendChild(locality);
 		stop.appendChild(location);
