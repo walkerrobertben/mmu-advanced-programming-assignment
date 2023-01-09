@@ -102,6 +102,7 @@ public class NaptanStops {
 			
 			//Create XML Doc
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			doc.setXmlStandalone(true);
 			
 			//Add root element to doc, and add stops to root.
 			Element root = doc.createElement("NearestStops");
@@ -124,7 +125,7 @@ public class NaptanStops {
 			err.printStackTrace();
 			
 			//return empty xml string
-			return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><NearestStops></NearestStops>";
+			return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><NearestStops></NearestStops>";
 		}
 		
 	}

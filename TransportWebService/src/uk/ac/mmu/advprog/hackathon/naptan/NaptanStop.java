@@ -60,6 +60,8 @@ public class NaptanStop {
 	 * esin = "empty string if null"
 	 * utility function for handling null values when converting to json/xml representation
 	 * 
+	 * ResultSet.getString seems to return "---" instead of null, so handle that too.
+	 * 
 	 * @return	the original object, or an empty string if the original object was null
 	 * 
 	 */
