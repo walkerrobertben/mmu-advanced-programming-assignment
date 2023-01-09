@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import uk.ac.mmu.advprog.hackathon.naptan.NaptanStops;
+
 import java.sql.PreparedStatement;
 
 public class DB implements AutoCloseable {

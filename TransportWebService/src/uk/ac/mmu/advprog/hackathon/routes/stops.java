@@ -6,8 +6,8 @@ import spark.Route;
 
 import uk.ac.mmu.advprog.hackathon.DB;
 import uk.ac.mmu.advprog.hackathon.DBException;
-import uk.ac.mmu.advprog.hackathon.NaptanStops;
 import uk.ac.mmu.advprog.hackathon.Validation;
+import uk.ac.mmu.advprog.hackathon.naptan.NaptanStops;
 
 public class stops implements Route {
 	@Override
