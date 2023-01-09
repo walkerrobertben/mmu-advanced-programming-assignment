@@ -106,7 +106,6 @@ public class NaptanStops {
 			//Add root element to doc, and add stops to root.
 			Element root = doc.createElement("NearestStops");
 			doc.appendChild(root);
-			
 			for (NaptanStop stop : this.naptanStops) {
 				root.appendChild(stop.asXML(doc));
 			}
