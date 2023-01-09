@@ -64,7 +64,7 @@ public class NaptanStop {
 	 * 
 	 */
 	private Object esin(Object v) {
-		if (v == null) {
+		if (v == null || "---".equals(v)) {
 			return "";
 		} else {
 			return v;
