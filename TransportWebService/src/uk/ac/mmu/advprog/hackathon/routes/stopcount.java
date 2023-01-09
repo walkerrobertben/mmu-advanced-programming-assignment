@@ -12,14 +12,18 @@ public class stopcount implements Route {
 	@Override
 	public Object handle(Request req, Response res) {
 		
-		//> parse req for locality parameter
-		//> validate parameter exists, right datatype
-		//>   run db query
-		//>     return value as plaintext string
+		//parse req for locality
+		//validate parameters
+		//run db query
+		//return result
+		
 		//> if query fails, return server error (500)
 		//> if invalid, return invalid request (400)
 		
+		//Extract url params
 		String locality = req.queryParams("locality");
+		
+		//Validate params
 		if (Validation.is_valid_locality(locality)) {
 			
 			try (DB db = new DB()) {

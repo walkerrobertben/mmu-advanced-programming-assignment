@@ -15,5 +15,4 @@ public class DBException extends Exception {
 		this.underlying_sqle = underlying_sqlexception;
 	}
 	
-	
 }
