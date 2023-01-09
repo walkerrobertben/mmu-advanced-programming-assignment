@@ -1,34 +1,48 @@
 package uk.ac.mmu.advprog.hackathon.routes;
 
-import static spark.Spark.*;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+
+import uk.ac.mmu.advprog.hackathon.DB;
+import uk.ac.mmu.advprog.hackathon.DBException;
 import uk.ac.mmu.advprog.hackathon.Validation;
 
 public class stopcount implements Route {
-	
 	@Override
 	public Object handle(Request req, Response res) {
 		
-		//parse req for locality parameter
-		//validate parameter exists, right datatype
-		//run db query
-		//return value
-		
+		//> parse req for locality parameter
+		//> validate parameter exists, right datatype
+		//>   run db query
+		//>     return value as plaintext string
+		//> if query fails, return server error (500)
+		//> if invalid, return invalid request (400)
 		
 		String locality = req.queryParams("locality");
 		if (Validation.is_valid_locality(locality)) {
 			
-			System.out.println(locality);
-			
-			
-			
-			
-			return "0";
+			try (DB db = new DB()) {
+				
+				//Count stops and return
+				int stopCount = db.countStopsByLocality(locality);
+				res.status(200);
+				res.type("text/plain");
+				return String.valueOf(stopCount);
+				
+				
+			//Server error
+			} catch (DBException dbe) {
+				System.err.println("DBException occured");
+				if (dbe.underlying_sqle != null) {
+					dbe.underlying_sqle.printStackTrace();
+				}
+				res.status(500);
+				return "Internal Server Error";
+			}
 		}
 		
-		//Default to invalid request
+		//Validation failed, invalid request
 		res.status(400);
 		return "Invalid Request";
 	}
