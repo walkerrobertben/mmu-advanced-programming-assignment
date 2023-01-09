@@ -32,6 +32,13 @@ public class TransportWebService {
 			}			
 		});
 		
+		get("/world", new Route() {
+			@Override
+			public Object handle(Request request, Response response) throws Exception {
+				return "hello";
+			}
+		});
+		
 		System.out.println("Server up! Don't forget to kill the program when done!");
 	}
 
