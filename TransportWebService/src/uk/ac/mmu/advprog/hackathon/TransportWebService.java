@@ -20,6 +20,7 @@ import spark.Spark;
  *  DB.java handles connecting, reading, and closing, the sqlite connection
  *  For routes that return stops (/stops and /nearest) the db rows are parsed into a NaptanStops
  *  
+ *  NaptanStops and NaptanStop are in the uk.ac.mmu.advprog.hackathon.naptan package
  *  NaptanStops object contains an arraylist of NaptanStop objects
  *  NaptanStop objects represent a single stop
  *  
